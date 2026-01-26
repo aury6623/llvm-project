@@ -176,6 +176,7 @@ static bool isInertIntrinsic(unsigned ID) {
   case Intrinsic::eh_sjlj_lsda:
   case Intrinsic::eh_sjlj_functioncontext:
   case Intrinsic::init_trampoline:
+  case Intrinsic::init_heap_trampoline:
   case Intrinsic::adjust_trampoline:
   case Intrinsic::lifetime_start:
   case Intrinsic::lifetime_end:

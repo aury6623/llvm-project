@@ -1124,6 +1124,7 @@ void SelectionDAGLegalize::LegalizeOp(SDNode *Node) {
       Action = TargetLowering::Expand;
     break;
   case ISD::INIT_TRAMPOLINE:
+  case ISD::INIT_HEAP_TRAMPOLINE:
   case ISD::ADJUST_TRAMPOLINE:
   case ISD::FRAMEADDR:
   case ISD::RETURNADDR:

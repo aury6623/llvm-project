@@ -522,6 +522,7 @@ std::string SDNode::getOperationName(const SelectionDAG *G) const {
 
   // Trampolines
   case ISD::INIT_TRAMPOLINE:            return "init_trampoline";
+  case ISD::INIT_HEAP_TRAMPOLINE:       return "init_heap_trampoline";
   case ISD::ADJUST_TRAMPOLINE:          return "adjust_trampoline";
 
     // clang-format on

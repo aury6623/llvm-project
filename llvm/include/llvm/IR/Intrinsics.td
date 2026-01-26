@@ -1580,6 +1580,12 @@ def int_init_trampoline : DefaultAttrsIntrinsic<
      ReadNone<ArgIndex<1>>, ReadNone<ArgIndex<2>>]>,
     ClangBuiltin<"__builtin_init_trampoline">;
 
+def int_init_heap_trampoline : DefaultAttrsIntrinsic<
+    [], [llvm_ptr_ty, llvm_ptr_ty, llvm_ptr_ty],
+    [IntrArgMemOnly, NoCapture<ArgIndex<0>>, WriteOnly<ArgIndex<0>>,
+     ReadNone<ArgIndex<1>>, ReadNone<ArgIndex<2>>]>,
+    ClangBuiltin<"__builtin_init_heap_trampoline">;
+
 def int_adjust_trampoline : DefaultAttrsIntrinsic<
     [llvm_ptr_ty], [llvm_ptr_ty], [IntrReadMem, IntrArgMemOnly]>,
     ClangBuiltin<"__builtin_adjust_trampoline">;

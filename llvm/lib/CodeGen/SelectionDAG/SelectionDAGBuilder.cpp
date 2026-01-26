@@ -7558,7 +7558,8 @@ void SelectionDAGBuilder::visitIntrinsicCall(const CallInst &I,
     return;
   }
 
-  case Intrinsic::init_trampoline: {
+  case Intrinsic::init_trampoline:
+  case Intrinsic::init_heap_trampoline: {
     const Function *F = cast<Function>(I.getArgOperand(1)->stripPointerCasts());
 
     SDValue Ops[6];
@@ -7569,7 +7570,11 @@ void SelectionDAGBuilder::visitIntrinsicCall(const CallInst &I,
     Ops[4] = DAG.getSrcValue(I.getArgOperand(0));
     Ops[5] = DAG.getSrcValue(F);
 
-    Res = DAG.getNode(ISD::INIT_TRAMPOLINE, sdl, MVT::Other, Ops);
+    unsigned Opcode = Intrinsic == Intrinsic::init_heap_trampoline
+                          ? ISD::INIT_HEAP_TRAMPOLINE
+                          : ISD::INIT_TRAMPOLINE;
+
+    Res = DAG.getNode(Opcode, sdl, MVT::Other, Ops);
 
     DAG.setRoot(Res);
     return;

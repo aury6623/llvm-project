@@ -21822,6 +21822,39 @@ calling ``llvm.init.trampoline``, the memory pointed to by ``tramp`` is
 modified, then the effect of any later call to the returned function
 pointer is undefined.
 
+.. _int_iht:
+
+'``llvm.init.heap.trampoline``' Intrinsic
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Syntax:
+"""""""
+
+::
+
+      declare void @llvm.init.heap.trampoline(ptr <tramp>, ptr <func>, ptr <nval>)
+
+Overview:
+"""""""""
+
+This intrinsic is identical to ``llvm.init.trampoline`` except that it assumes
+the ``tramp`` argument is allocated on the heap instead of the stack. The
+only functional difference is that using ``llvm.init.trampoline`` causes the
+``.note.GNU-stack`` section to be emitted with the 'execute' bit set, indicating
+the program requires an executable stack, where as this intrinsic does not
+affect ``.note.GNU-stack``.
+
+Arguments:
+""""""""""
+
+Same as ``llvm.init.trampoline``.
+
+Semantics:
+""""""""""
+
+Same as ``llvm.init.trampoline``, except that ``.note.GNU-stack`` is not
+affected.
+
 .. _int_at:
 
 '``llvm.adjust.trampoline``' Intrinsic

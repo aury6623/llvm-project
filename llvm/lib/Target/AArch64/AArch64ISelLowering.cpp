@@ -1121,6 +1121,7 @@ AArch64TargetLowering::AArch64TargetLowering(const TargetMachine &TM,
 
   // llvm.init.trampoline and llvm.adjust.trampoline
   setOperationAction(ISD::INIT_TRAMPOLINE, MVT::Other, Custom);
+  setOperationAction(ISD::INIT_HEAP_TRAMPOLINE, MVT::Other, Custom);
   setOperationAction(ISD::ADJUST_TRAMPOLINE, MVT::Other, Custom);
 
   // Vector add and sub nodes may conceal a high-half opportunity.
@@ -7882,6 +7883,7 @@ SDValue AArch64TargetLowering::LowerOperation(SDValue Op,
     return LowerPtrAuthGlobalAddress(Op, DAG);
   case ISD::ADJUST_TRAMPOLINE:
     return LowerADJUST_TRAMPOLINE(Op, DAG);
+  case ISD::INIT_HEAP_TRAMPOLINE:
   case ISD::INIT_TRAMPOLINE:
     return LowerINIT_TRAMPOLINE(Op, DAG);
   case ISD::SETCC:

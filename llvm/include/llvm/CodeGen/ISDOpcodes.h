@@ -1324,6 +1324,7 @@ enum NodeType {
   /// (allowing targets to access the original Function*).
   /// It produces a token chain as output.
   INIT_TRAMPOLINE,
+  INIT_HEAP_TRAMPOLINE,
 
   /// ADJUST_TRAMPOLINE - This corresponds to the adjust_trampoline intrinsic.
   /// It takes a pointer to the trampoline and produces a (possibly) new

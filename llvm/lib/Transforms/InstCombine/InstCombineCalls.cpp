@@ -4405,7 +4405,8 @@ static IntrinsicInst *findInitTrampolineFromAlloca(Value *TrampMem) {
     IntrinsicInst *II = dyn_cast<IntrinsicInst>(U);
     if (!II)
       return nullptr;
-    if (II->getIntrinsicID() == Intrinsic::init_trampoline) {
+    if (II->getIntrinsicID() == Intrinsic::init_trampoline ||
+        II->getIntrinsicID() == Intrinsic::init_heap_trampoline) {
       if (InitTrampoline)
         // More than one init_trampoline writes to this value.  Give up.
         return nullptr;
@@ -4438,7 +4439,8 @@ static IntrinsicInst *findInitTrampolineFromBB(IntrinsicInst *AdjustTramp,
        I != E;) {
     Instruction *Inst = &*--I;
     if (IntrinsicInst *II = dyn_cast<IntrinsicInst>(I))
-      if (II->getIntrinsicID() == Intrinsic::init_trampoline &&
+      if ((II->getIntrinsicID() == Intrinsic::init_trampoline ||
+           II->getIntrinsicID() == Intrinsic::init_heap_trampoline) &&
           II->getOperand(0) == TrampMem)
         return II;
     if (Inst->mayWriteToMemory())

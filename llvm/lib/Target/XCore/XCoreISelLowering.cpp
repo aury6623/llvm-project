@@ -123,6 +123,7 @@ XCoreTargetLowering::XCoreTargetLowering(const TargetMachine &TM,
 
   // TRAMPOLINE is custom lowered.
   setOperationAction(ISD::INIT_TRAMPOLINE, MVT::Other, Custom);
+  setOperationAction(ISD::INIT_HEAP_TRAMPOLINE, MVT::Other, Custom);
   setOperationAction(ISD::ADJUST_TRAMPOLINE, MVT::Other, Custom);
 
   // We want to custom lower some of our intrinsics.
@@ -182,6 +183,7 @@ LowerOperation(SDValue Op, SelectionDAG &DAG) const {
   case ISD::FRAMEADDR:          return LowerFRAMEADDR(Op, DAG);
   case ISD::RETURNADDR:         return LowerRETURNADDR(Op, DAG);
   case ISD::FRAME_TO_ARGS_OFFSET: return LowerFRAME_TO_ARGS_OFFSET(Op, DAG);
+  case ISD::INIT_HEAP_TRAMPOLINE:
   case ISD::INIT_TRAMPOLINE:    return LowerINIT_TRAMPOLINE(Op, DAG);
   case ISD::ADJUST_TRAMPOLINE:  return LowerADJUST_TRAMPOLINE(Op, DAG);
   case ISD::INTRINSIC_WO_CHAIN: return LowerINTRINSIC_WO_CHAIN(Op, DAG);
